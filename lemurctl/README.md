@@ -41,7 +41,7 @@ $ make
 ```
 * Move the binary into your PATH
 ```
-$ sudo mv ./kubectl /usr/local/bin/lemurctl
+$ sudo mv ./lemurctl /usr/local/bin/lemurctl
 ```
 * Test to ensure the version you installed is up-to-date
 ```
