@@ -46,12 +46,12 @@ func Run() {
 			EnvVar: "INFLUXDB_SERVER",
 		},
 		cli.BoolFlag{
-			Name:   "debug, d",
+			Name:   "debug,d",
 			Usage:  "enable debug mode",
 			EnvVar: "DEBUG",
 		},
 		cli.StringFlag{
-			Name:   "log-level, l",
+			Name:   "log-level,l",
 			Value:  "info",
 			Usage:  "specify log level (debug, info, warn, error, fatal, panic)",
 			EnvVar: "LOG_LEVEL",
