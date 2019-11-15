@@ -6,6 +6,11 @@ import (
 	"github.com/urfave/cli"
 )
 
+var (
+	headerFormat  = "%-40s%-25s\n"
+	contentFormat = "%-40s%-25s\n"
+)
+
 func GetCluster(c *cli.Context) error {
 	clusterType := c.String("type")
 	if clusterType != "vm" && clusterType != "host" {
@@ -16,6 +21,7 @@ func GetCluster(c *cli.Context) error {
 		return err
 	}
 	defer db.Close()
+	fmt.Printf(headerFormat, "ID", "TYPE")
 	if clusterType == "vm" {
 		return GetVMCluster(c, db)
 	}
@@ -32,7 +38,7 @@ func GetVMCluster(c *cli.Context, db *influx.DBInstance) error {
 		return err
 	}
 	for _, value := range row.Values {
-		fmt.Println(value[1])
+		fmt.Printf(contentFormat, value[1], "vm")
 	}
 	return nil
 }
@@ -47,7 +53,7 @@ func GetHostCluster(c *cli.Context, db *influx.DBInstance) error {
 		return err
 	}
 	for _, value := range row.Values {
-		fmt.Println(value[1])
+		fmt.Printf(contentFormat, value[1], "host")
 	}
 	return nil
 }
