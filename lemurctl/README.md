@@ -24,7 +24,8 @@ limitations under the License.
 
 **Lemurctl** is a command line utility to access and control Lemur powered by Turbonomic. It offers the capability to view real time entities discovered by Lemur, and the resource consumer and provider relationships between these entities (i.e., the supply chain). Using Lemur, user can easily sort entities of certain type (e.g., applications, or containers) based on their resource consumption. User can also take a top-down approach to examine the metric and resource usage of a specific application and all the other entities along the supply chain of that application to quickly determine the resource bottle neck that may affect the performance of the application.
 
-## Getting Started
+## Getting Started 
+Leverage the [wiki pages](https://github.com/turbonomic/lemur/wiki/Lemurctl) for updated details
 ### Prerequiste
 * Go 1.13 (Go version prior to 1.13 requires module-aware mode, e.g., [GO111MODULE](https://golang.org/cmd/go/#hdr-Module_support)=on)
 * Lemur server is installed and running
@@ -49,6 +50,7 @@ $ lemurctl -v
 ```
 
 ## Use Cases
+Get first familiar with the concept and taxonomy of the Lemur/Turbonomic Supply Chain [here](https://github.com/turbonomic/lemur/wiki/Lemur-Use-Cases)
 * Always use the `-h` or `--help` option to get a description of the command syntax and options
 ```
 $ lemurctl -h
@@ -173,7 +175,7 @@ NAME
 GP2                                              
 
 ```
-## Comming Soon
+## Coming Soon
 * The ability to auto-discover influxdb service without user having to manually provide the information
 * The ability to manage (list/add/remove) targets
 * The ability to execute actions
