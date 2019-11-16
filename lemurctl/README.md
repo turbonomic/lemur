@@ -118,7 +118,7 @@ App-istio-system/istio-policy-85469bdfbb-jmw77/istio-proxy                      
 ```
 * Get a list of VMs that belong to a kubernetes cluster sorted by VMEM
 ```
-meng@Mengs-MacBook-Pro$ ./lemurctl get vm --sort VMEM
+$ lemurctl get vm --sort VMEM
 NAME                                        VCPU (MHz)          VMEM (GB)    
 meng-xl-machinedeployment-78d5dd8785-2gws6  971.53 [21.12%]     5.77 [70.68%]
 meng-xl-machinedeployment-78d5dd8785-8v4ss  364.28 [7.92%]      5.54 [67.85%]
@@ -174,6 +174,7 @@ GP2
 
 ```
 ## Comming Soon
+* The ability to auto-discover influxdb service without user having to manually provide the information
 * The ability to manage (list/add/remove) targets
 * The ability to execute actions
 * The ability to show a meaningful display name of a cluster
