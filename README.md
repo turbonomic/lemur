@@ -24,7 +24,7 @@ limitations under the License.
 
 # **Project LEMUR: Observability and Context** 
 
-Start with documentation on the [wiki](https://github.com/turbonomic/lemur/wiki). Developers can use Lemur to understand their microservice applications in the context of the stack, determining whether there are performance issues in application code or architecture, or whether the issue is with the underlying infrastructure.
+Start with documentation on the [wiki](https://github.com/turbonomic/lemur/wiki). Developers can use Lemur and [Lemurctl](https://github.com/turbonomic/lemur/wiki/Lemurctl) to understand their microservice applications in the context of the stack, determining whether there are performance issues in application code or architecture, or whether the issue is with the underlying infrastructure.
 
 <p align="center">
   <img src="https://github.com/evat-pm/images/blob/master/LemurNewFull.png" width="150" height="150">
