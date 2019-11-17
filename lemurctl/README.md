@@ -26,7 +26,7 @@ limitations under the License.
 
 ## Getting Started 
 Leverage the [wiki pages](https://github.com/turbonomic/lemur/wiki/Lemurctl) for updated details
-### Prerequiste
+### Prerequisites
 * Go 1.13 (Go version prior to 1.13 requires module-aware mode, e.g., [GO111MODULE](https://golang.org/cmd/go/#hdr-Module_support)=on)
 * Lemur server is installed and running
 
