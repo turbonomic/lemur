@@ -1,0 +1,249 @@
+apiVersion: charts.helm.k8s.io/v1alpha1
+kind: Xl
+metadata:
+  name: lemur-release
+spec:
+  # Grafana
+  grafana:
+    # Specify the password for grafana here
+    adminPassword: admin
+    # Do not change the following
+    enabled: true
+    grafana.ini:
+      security:
+        allow_embedding: true
+      server:
+        root_url: '%(protocol)s://%(domain)s/grafana'
+        serve_from_sub_path: true
+      users:
+        default_theme: light
+
+  # Probes
+  kubeturbo:
+    # Enable kubeturbo pod
+    enabled: false
+    restAPIConfig:
+      opsManagerUserName: administrator
+      # Specify the password for your Lemur server
+      opsManagerPassword: administrator
+    image:
+      repository: turbonomic/kubeturbo
+      tag: latest
+    serverMeta:
+      version: 7.21
+      turboServer: https://t8c-istio-ingressgateway.lemur
+
+  aws:
+    enabled: false
+  azure:
+    enabled: false
+  vcenter:
+    enabled: false
+
+  # Lemur service configurations and resource limits
+  api:
+    resources:
+      limits:
+        memory: 512Mi
+  group:
+    resources:
+      limits:
+        memory: 512Mi
+  repository:
+    resources:
+      limits:
+        memory: 1Gi
+  topology-processor:
+    resources:
+      limits:
+        memory: 1Gi
+  influxdb:
+    service:
+      type: LoadBalancer
+    resources:
+      limits:
+        memory: 256Mi
+  ml-datastore:
+    resources:
+      limits:
+        memory: 512Mi
+  db:
+    env:
+    - name: DB_MAX_ALLOWED_PACKET
+      value: "16M"
+    - name: DB_KEY_BUFFER_SIZE
+      value: "32M"
+    - name: DB_MYISAM_SORT_BUFFER_SIZE
+      value: "64M"
+    persistence:
+      size: 10Gi
+    resources:
+      requests:
+        memory: 256Mi
+      limits:
+        memory: 512Mi
+  auth:
+    resources:
+      limits:
+        memory: 512Mi
+  clustermgr:
+    resources:
+      limits:
+        memory: 384Mi
+  kafka:
+    java:
+      options: "-Xms512M -Xmx512M"
+    persistence:
+      size: 10Gi
+    resources:
+      limits:
+        memory: 1Gi
+  zookeeper:
+    resources:
+      limits:
+        memory: 384Mi
+
+  # Probe configuration resource limits
+  mediation-aws:
+    resources:
+      limits:
+        memory: 2Gi
+  mediation-azure:
+    resources:
+      limits:
+        memory: 1Gi
+  mediation-vcenter:
+    resources:
+      limits:
+        memory: 1Gi
+  mediation-vcenterbrowsing:
+    resources:
+      limits:
+        memory: 384Mi
+
+
+  # DO NOT CHANGE THE FOLLOWING SECTION UNLESS YOU ARE SURE
+  # =======================================================================
+  global:
+    repository: ading1977
+    tag: 7.21.0-SNAPSHOT
+    pullPolicy: Always
+    ingress:
+      domain: "*"
+      secrets:
+        - certificate: |
+            -----BEGIN CERTIFICATE-----
+            MIIFQjCCAyqgAwIBAgIDEAISMA0GCSqGSIb3DQEBCwUAMEUxCzAJBgNVBAYTAlVT
+            MQ8wDQYDVQQIDAZEZW5pYWwxDDAKBgNVBAoMA0RpczEXMBUGA1UEAwwOKnZtdHVy
+            Ym8uY2xvdWQwHhcNMTkwOTAzMDAxNDQzWhcNMjAwOTEyMDAxNDQzWjBbMQswCQYD
+            VQQGEwJVUzEPMA0GA1UECAwGRGVuaWFsMRQwEgYDVQQHDAtTcHJpbmdmaWVsZDEM
+            MAoGA1UECgwDRGlzMRcwFQYDVQQDDA4qdm10dXJiby5jbG91ZDCCASIwDQYJKoZI
+            hvcNAQEBBQADggEPADCCAQoCggEBANBKHn3/OjIbgscP0JvFdV5Gq3Lh/JNAXDjw
+            FFOI9TB4iadpt25Q+hnmCp2FQmSk6xJrPGi1IVrDSOvXi4+fyK/rPMuOALwPZBQX
+            L2XJzS9ZFzC4vTbgrq8qxD71w8N1WPZjphCqtqWnEHcc7U4mJ8vDaB77zXm10jlw
+            q52j1FFJcouDtWaezdFheja0csQ4NCGkaQaFKbHhbS+xxri3v5imTu3/hFYik+Je
+            I5dH21ghOWcgxhtWPbh572OBs0mA9VBlYO5dWMBabFrLGW6pLekC6J5L4zaiiq9S
+            g0O0kJrS49/o4jynDrEwwzF+rA99b8PWR0HeY9V/YlrcznCVP5kCAwEAAaOCASMw
+            ggEfMAkGA1UdEwQCMAAwEQYJYIZIAYb4QgEBBAQDAgZAMDMGCWCGSAGG+EIBDQQm
+            FiRPcGVuU1NMIEdlbmVyYXRlZCBTZXJ2ZXIgQ2VydGlmaWNhdGUwHQYDVR0OBBYE
+            FPXSo9e9dZ552Yly4NJtRBT/8h3HMIGFBgNVHSMEfjB8gBSTqOgzeF+AVvOscX6X
+            bEzUABwCJKFfpF0wWzELMAkGA1UEBhMCVVMxDzANBgNVBAgMBkRlbmlhbDEUMBIG
+            A1UEBwwLU3ByaW5nZmllbGQxDDAKBgNVBAoMA0RpczEXMBUGA1UEAwwOKnZtdHVy
+            Ym8uY2xvdWSCAxACEjAOBgNVHQ8BAf8EBAMCBaAwEwYDVR0lBAwwCgYIKwYBBQUH
+            AwEwDQYJKoZIhvcNAQELBQADggIBAFHA39Oc5haiH7euRFGs3tWQVxro3UWmK80b
+            /mvAulZT6GL5FO5tneMggVQKo/I1onmEJs93Jd0cvYASIiPutzY9Xsh+X9PPJeUP
+            L8rqjvsWfygDz6zm2ubuz5qEiIblRvmVUcrzHyorc+NvF0AWHsscygY9V2XOVcpA
+            v8Cauf+RUdDzsFSeNJdizIuBR0chlYtID7OHb5pvkR6gYXaUlrSBCvBg35ovjH4B
+            HzZc7g0hWm11V0WDPnOD+KVgxm4E0o1Px1wFQFLq0lsdeeDCnmDZH497UNDn+VZY
+            VIC5cIBo/EXqcBx+tz6023Todoy8hth/JvTnjfdd05IdsBLrKrdiT9Cjga7rQOK+
+            rKXHKKDfenw8QYjhBSiPAUyeX4hT4LEeU1BZ+gOaSCuzFYaBqlPlepIkf7Aa7XyP
+            dMk0SefqGy1l3nZaNGUHZHG6fN6zG5A7+sq+vJc4pnfPRsTeDJkT0Ftb9QsYh5sb
+            6mGQ5y7ta2MX5TObJDCY9RI/gd4Kg4SPpUpAOwTB2jna5fqnc+AIGydnGf35AsX9
+            aiTGYbvQf3tSQfSydaR4KruiQiNfsZMQQlN8LwKHuOMcrEJ/jeKTrk4cSh1G8O2S
+            KRf/X7ekGSDEsI1WsSIKjyJq5rS3vn0n8iPVvEWdcVwQVF7ztTe8qHl0X7wNoqky
+            sVvOSxBv
+            -----END CERTIFICATE-----
+          key: |
+            -----BEGIN RSA PRIVATE KEY-----
+            MIIEpQIBAAKCAQEA0Eoeff86MhuCxw/Qm8V1XkarcuH8k0BcOPAUU4j1MHiJp2m3
+            blD6GeYKnYVCZKTrEms8aLUhWsNI69eLj5/Ir+s8y44AvA9kFBcvZcnNL1kXMLi9
+            NuCuryrEPvXDw3VY9mOmEKq2pacQdxztTiYny8NoHvvNebXSOXCrnaPUUUlyi4O1
+            Zp7N0WF6NrRyxDg0IaRpBoUpseFtL7HGuLe/mKZO7f+EViKT4l4jl0fbWCE5ZyDG
+            G1Y9uHnvY4GzSYD1UGVg7l1YwFpsWssZbqkt6QLonkvjNqKKr1KDQ7SQmtLj3+ji
+            PKcOsTDDMX6sD31vw9ZHQd5j1X9iWtzOcJU/mQIDAQABAoIBAH8j/yDh3mAfsuBX
+            ovqyuUXm1Vi24TnxG1oWEhI7k48WxM/QFAvemgudA/XLFg/hKyx/EMzJY6bHdYeg
+            dqwg2Jupd964u3IP4wLwdBop6HlyZFl1KuqIk5iQ/mGAGxMAWmFryj56Nis/oylS
+            GviNCdWzXacsBOy6M6ykPd1n134VwDM55aIpwdcZm/GlJPOYCipOo3zZIR9jqR8w
+            m/99Pq4VyFGV9Q5PPUl60Sz+jmA48DJZF5uKZQHrK4peYOmmmEXjqs7QUHk0Mppe
+            dwkjY9prJqGxDgWVIm/qxv6j5tK+8a9wuIR4Gjs77eAS4qi1eWhbbFLQmCvnmRqj
+            o5Y150ECgYEA/GlJCuLZbofsnyIwFKpwH0e45A67A4LDyJblvNzO4MFKXDsd2btq
+            jLqjTJC1Z3Se+4sVG6z/ppTPAeuDETVV3fBIJhYMGgi8RCUTxwTenEM1HVt/Q6RT
+            OfgrXs7+gBoMmXxr1BM5DaHVJiuAh35I4yro6usA+wDu0LuzBRqF+n0CgYEA00A9
+            1avv8NQYgZ8ycGx7BZsSuSOIHuk60h3Q2ySfwBPRPugIZ29a2xjvETxG+ElW+rJJ
+            s5Cz6kcedxIaxPE7IOuRxUKT9NvilIwgUEqMAKBowRFY2RJ0vRaZFWVB5NeqpICA
+            JyMnhGENEsWIlPfZo5+Tw+r3PmmEiBXNd8VZCE0CgYEA8emKateN4oR9QOsIP9Y2
+            DZS03EZN8Ih0UhxlZQQPdpNqTEkQS+x2qxf5iFkss1GvSZA8E8FTZ/k5CTMJ9AU1
+            Hbe7vlzlDlKO9ZS/hr/hBszW7CMULuUgKu/xyTUD8AyHRNddlO0zgiA3ZBTPY4yi
+            GK64euXuk6KKQB2U7vBDthUCgYEAmfO6XIqWLUtUpLpxFs9oBFjUF0qWu/g63r/N
+            4rbZGTEYECEnZsIXU47jQwtLqUxBcCgYYB13kKfNwvbVvWsULVSgAkMX8p2AjcNl
+            FT6OszIzxWgv+Npjax4Z6CbIE888U/A19M/Az8+uqFx+whmyaXU1SdVl4/0gEdDZ
+            0Yxn6w0CgYEAxsxRLmkdOoTe7XVF/9c+4wht/W5E6tY1dApikFyTArzgYtP4x96k
+            VS+WuRIK/nE+F3svqfzanvMno9trKUGlxwGkbyvpTGja1LVQyNAEly1T+Jjt06S3
+            JpJmetExe/m95UukLiBNKVxXWGzZ6T7EAqKE5PU6HB0GUiwei7zt+kQ=
+            -----END RSA PRIVATE KEY-----
+          name: istio-ingressgateway-certs
+
+  nginxingress:
+    enabled: false
+  istioingress:
+    enabled: true
+    routes:
+    - match:
+      - uri:
+          prefix: /grafana
+      route:
+      - destination:
+          host: grafana
+          port:
+            number: 3000
+    - match:
+      - uri:
+          prefix: /vmturbo/remoteMediation
+      rewrite:
+        uri: /remoteMediation
+      route:
+      - destination:
+          host: topology-processor.lemur.svc.cluster.local
+          port:
+            number: 8080
+    - match:
+      - uri:
+          prefix: /kiali
+      route:
+      - destination:
+          host: kiali.istio-system.svc.cluster.local
+          port:
+            number: 20001
+    - match:
+      - uri:
+          prefix: /jaeger
+      route:
+      - destination:
+          host: tracing.istio-system.svc.cluster.local
+          port:
+            number: 80
+  
+  platform:
+    enabled: true
+  control:
+    enabled: false
+  metron:
+    enabled: true
+  prometheus:
+    enabled: true
+  awscost:
+    enabled: false
+  azurecost:
+    enabled: false
+  # =======================================================================
+
