@@ -26,6 +26,7 @@ limitations under the License.
 
 ## Getting Started 
 Leverage the [wiki pages](https://github.com/turbonomic/lemur/wiki/Lemurctl) for updated details
+
 ### Prerequisites
 * Go 1.13 (Go version prior to 1.13 requires module-aware mode, e.g., [GO111MODULE](https://golang.org/cmd/go/#hdr-Module_support)=on)
 * Lemur server is installed and running
@@ -74,6 +75,14 @@ Commands:
   
 Run 'lemurctl COMMAND --help' for more information on a command.
 
+```
+* `lemurctl` interacts with the InfluxDB service that comes with your Lemur install to retrieve the entity information and build the supply chain. Make sure the InfluxDB service in your Lemur install can be accessed from the host where `lemurctl` is running, and specify the correct `INFLUXDB_SERVER` environment variable in your shell. For example, the following command get the LoadBalancer IP of the InfluxDB service, and export the IP:PORT accordingly:
+```
+$ kubectl -n turbonomic get svc influxdb
+NAME       TYPE           CLUSTER-IP      EXTERNAL-IP                                                                  PORT(S)                         AGE
+influxdb   LoadBalancer   10.110.31.245   a7ffd4d4c068811eabb8c02915a99801-198398107.ca-central-1.elb.amazonaws.com    8086:30558/TCP,8088:30859/TCP   9h
+
+$ export INFLUXDB_SERVER=a7ffd4d4c068811eabb8c02915a99801-198398107.ca-central-1.elb.amazonaws.com:8086
 ```
 * Get a list of kubernetes clusters discovered by Lemur
 ```
