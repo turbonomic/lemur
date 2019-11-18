@@ -125,8 +125,8 @@ spec:
   # DO NOT CHANGE THE FOLLOWING SECTION UNLESS YOU ARE SURE
   # =======================================================================
   global:
-    repository: ading1977
-    tag: 7.21.0-SNAPSHOT
+    repository: lemurnomic
+    tag: 0.1.0
     pullPolicy: Always
     ingress:
       domain: "*"
