@@ -21,8 +21,9 @@ limitations under the License.
 -->
 
 # **Project LEMUR: Observability and Context** 
+Developers can use Lemur and [Lemurctl](https://github.com/turbonomic/lemur/wiki/Lemurctl) to understand their microservice applications in the context of the stack, determining whether there are performance issues in application code or architecture, or whether the issue is with the underlying infrastructure.
 
-Start with documentation on the [wiki](https://github.com/turbonomic/lemur/wiki). Developers can use Lemur and [Lemurctl](https://github.com/turbonomic/lemur/wiki/Lemurctl) to understand their microservice applications in the context of the stack, determining whether there are performance issues in application code or architecture, or whether the issue is with the underlying infrastructure.
+>Find **Lemur set up instructions** on the wiki: [Lemur stack](https://github.com/turbonomic/lemur/wiki/Lemur-Installation) and [Lemurctl](https://github.com/turbonomic/lemur/wiki/Lemurctl)
 
 ### What's Included: Observability + Context
 This free offering is a bundling of 3 observability tools, plus Turbonomic full-stack context. In a single UI, you can analyze your applications within the context of the platforms it runs on.
