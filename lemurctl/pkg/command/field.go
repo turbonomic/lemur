@@ -40,10 +40,10 @@ var (
 				factor:   1.0,
 			},
 			{
-				header:   "VMEM (GB)",
+				header:   "VMEM (MB)",
 				commName: "VMEM",
 				commType: boughtType,
-				factor:   1E-6,
+				factor:   1E-3,
 			},
 		},
 		proto.EntityDTO_CONTAINER: {
@@ -54,10 +54,10 @@ var (
 				factor:   1.0,
 			},
 			{
-				header:   "VMEM (GB)",
+				header:   "VMEM (MB)",
 				commName: "VMEM",
 				commType: soldType,
-				factor:   1E-6,
+				factor:   1E-3,
 			},
 		},
 		proto.EntityDTO_CONTAINER_POD: {
@@ -68,10 +68,10 @@ var (
 				factor:   1.0,
 			},
 			{
-				header:   "VMEM (GB)",
+				header:   "VMEM (MB)",
 				commName: "VMEM",
 				commType: soldType,
-				factor:   1E-6,
+				factor:   1E-3,
 			},
 		},
 		proto.EntityDTO_VIRTUAL_MACHINE: {
