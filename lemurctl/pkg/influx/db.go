@@ -107,6 +107,7 @@ func (q *DBQuery) build() string {
 func NewDBInstance(c *cli.Context) (*DBInstance, error) {
 	influxClient, err := client.NewHTTPClient(client.HTTPConfig{
 		Addr: "http://" + c.GlobalString("influxdb"),
+		InsecureSkipVerify: c.GlobalBool("insecure"),
 	})
 	if err != nil {
 		return nil, err

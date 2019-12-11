@@ -46,15 +46,20 @@ func Run() {
 			EnvVar: "INFLUXDB_SERVER",
 		},
 		cli.BoolFlag{
-			Name:   "debug,d",
-			Usage:  "enable debug mode",
-			EnvVar: "DEBUG",
+			Name:   "insecure,k",
+			Usage:  "allow connections to SSL enabled InfluxDB server without certs",
+			EnvVar: "INSECURE_CONNECTION",
 		},
 		cli.StringFlag{
 			Name:   "log-level,l",
 			Value:  "info",
 			Usage:  "specify log level (debug, info, warn, error, fatal, panic)",
 			EnvVar: "LOG_LEVEL",
+		},
+		cli.BoolFlag{
+			Name:   "debug,d",
+			Usage:  "enable debug mode",
+			EnvVar: "DEBUG",
 		},
 	}
 
