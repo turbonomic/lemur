@@ -20,6 +20,12 @@ See the License for the specific language governing permissions and
 limitations under the License.
 -->
 
+![Docker Pulls](https://img.shields.io/docker/pulls/lemurnomic/t8c-operator.svg?maxAge=604800)
+[![Slack Status](https://joinlemur.herokuapp.com/badge.svg)](https://lemurstack.slack.com)
+[Join Lemur SLACK!](https://joinlemur.herokuapp.com/slackin.js)
+
+**Documentation** is being maintained on the Wiki for this project.  Visit [Lemur Wiki](https://github.com/turbonomic/lemur/wiki) for the full documentation, examples and guides. 
+
 # **Project LEMUR: Observability and Context** 
 Developers can use Lemur and [Lemurctl](https://github.com/turbonomic/lemur/wiki/Lemurctl) to understand their microservice applications in the context of the stack, determining whether there are performance issues in application code or architecture, or whether the issue is with the underlying infrastructure.
 
