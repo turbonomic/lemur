@@ -19,13 +19,16 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 -->
+![Docker Pulls](https://img.shields.io/docker/pulls/lemurnomic/t8c-operator.svg?maxAge=604800)
+[![Slack Status](https://joinlemur.herokuapp.com/badge.svg)](https://lemurstack.slack.com)
+[Join Lemur SLACK!](https://joinlemur.herokuapp.com/slackin.js)
 
 ## Overview
 
 **Lemurctl** is a command line utility to access and control Lemur powered by Turbonomic. It offers the capability to view real time entities discovered by Lemur, and the resource consumer and provider relationships between these entities (i.e., the supply chain). Using Lemur, user can easily sort entities of certain type (e.g., applications, or containers) based on their resource consumption. User can also take a top-down approach to examine the metric and resource usage of a specific application and all the other entities along the supply chain of that application to quickly determine the resource bottle neck that may affect the performance of the application.
 
 ## Getting Started 
-Leverage the [wiki pages](https://github.com/turbonomic/lemur/wiki/Lemurctl) for updated details
+VISIT the [wiki pages](https://github.com/turbonomic/lemur/wiki/Lemurctl) for updated details
 
 ### Prerequisites
 * Go 1.13 (Go version prior to 1.13 requires module-aware mode, e.g., [GO111MODULE](https://golang.org/cmd/go/#hdr-Module_support)=on)
