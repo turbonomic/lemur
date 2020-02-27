@@ -1,0 +1,21 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+ name: "istio-kiali"
+ namespace: "istio-system"
+spec:
+ host: "kiali.istio-system.svc.cluster.local"
+ trafficPolicy:
+   tls:
+     mode: DISABLE
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+ name: "istio-tracing"
+ namespace: "istio-system"
+spec:
+ host: "tracing.istio-system.svc.cluster.local"
+ trafficPolicy:
+   tls:
+     mode: DISABLE

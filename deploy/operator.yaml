@@ -16,7 +16,7 @@ spec:
       containers:
         - name: t8c-operator
           # Replace this with the built image name
-          image: lemurnomic/t8c-operator:0.1.0
+          image: lemurnomic/t8c-operator:7.21.0
           imagePullPolicy: Always
           env:
             - name: WATCH_NAMESPACE
