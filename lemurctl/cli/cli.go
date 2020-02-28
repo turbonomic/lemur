@@ -20,11 +20,7 @@ var (
 		"resource consumption. User can also take a top-down approach to examine the metric " +
 		"and resource usage of a specific application and all the other entities along the " +
 		"supply chain of that application to quickly determine the resource bottle neck that " +
-		"may affect the performance of the application." +
-		"\n\nlemurctl interacts with influxdb to retrieve the entity information and build " +
-		"the supply chain. Make sure the influxdb service in your Lemur install can be " +
-		"accessed from the host where lemurctl is running, and specify the correct " +
-		"$INFLUXDB_SERVER environment variable, or the --influxdb command line option."
+		"may affect the performance of the application."
 )
 
 func Run() {
@@ -39,11 +35,6 @@ func Run() {
 		app.Compiled = time.Time{}
 	}
 	app.Flags = []cli.Flag{
-		cli.StringFlag{
-			Name:   "influxdb",
-			Usage:  "specify the endpoint of the InfluxDB server",
-			EnvVar: "INFLUXDB_SERVER",
-		},
 		cli.StringFlag{
 			Name:   "kubeconfig",
 			Usage:  "path to the kubeconfig file to access the Lemur cluster",
@@ -60,6 +51,11 @@ func Run() {
 			Value:  "info",
 			Usage:  "specify log level (debug, info, warn, error, fatal, panic)",
 			EnvVar: "LOG_LEVEL",
+		},
+		cli.StringFlag{
+			Name:   "influxdb",
+			Usage:  "specify the endpoint of the InfluxDB server (deprecated)",
+			EnvVar: "INFLUXDB_SERVER",
 		},
 		cli.BoolFlag{
 			Name:   "debug,d",
