@@ -2,11 +2,21 @@ package influx
 
 import (
 	"fmt"
+	"strings"
+
 	"github.com/influxdata/influxdb1-client/models"
 	client "github.com/influxdata/influxdb1-client/v2"
 	log "github.com/sirupsen/logrus"
+	"github.com/turbonomic/lemur/lemurctl/utils"
 	"github.com/urfave/cli"
-	"strings"
+	v1 "k8s.io/api/core/v1"
+	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+)
+
+const (
+	lemurDefaultNamespace = "lemur"
+	lemurServiceName      = "t8c-istio-ingressgateway"
+	influxdbServiceName   = "influxdb"
 )
 
 type DBQuery struct {
@@ -29,12 +39,12 @@ type DBInstance struct {
 	cliContext   *cli.Context
 }
 
-func NewDBQuery(c *cli.Context) *DBQuery {
+func NewDBQuery() *DBQuery {
 	return &DBQuery{
-		columns:   []string{},
-		database:  dbName,
-		queryType: "data",
-		desc:      true,
+		columns:    []string{},
+		database:   dbName,
+		queryType:  "data",
+		desc:       true,
 		conditions: []string{"time>now()-10m"},
 	}
 }
@@ -104,9 +114,55 @@ func (q *DBQuery) build() string {
 	return query
 }
 
+func getAddress(c *cli.Context) (string, error) {
+	// Getting address from command line argument
+	if c.GlobalString("influxdb") != "" {
+		return c.GlobalString("influxdb"), nil
+	}
+	// Getting address from k8s service endpoint
+	kubeClient, err := utils.GetKubeClient(c.GlobalString("kubeconfig"))
+	if err != nil {
+		return "", err
+	}
+	svc, err := kubeClient.CoreV1().
+		Services(lemurDefaultNamespace).
+		Get(lemurServiceName, metav1.GetOptions{})
+	if err != nil {
+		return "", err
+	}
+	serviceType := svc.Spec.Type
+	if serviceType != v1.ServiceTypeLoadBalancer {
+		return "", fmt.Errorf("lemur service %v does not have %v service type",
+			lemurServiceName, v1.ServiceTypeLoadBalancer)
+	}
+	ingresses := svc.Status.LoadBalancer.Ingress
+	externalIPs := svc.Spec.ExternalIPs
+	var address string
+	if len(ingresses) > 0 {
+		if ingresses[0].Hostname != "" {
+			address = ingresses[0].Hostname
+		} else if ingresses[0].IP != "" {
+			address = ingresses[0].IP
+		}
+	} else if len(externalIPs) > 0 {
+		address = externalIPs[0]
+	} else {
+		return "", fmt.Errorf("lemur service %v does not have an ingress or external IP",
+			lemurServiceName)
+	}
+	return address + "/" + influxdbServiceName, nil
+}
+
 func NewDBInstance(c *cli.Context) (*DBInstance, error) {
+	address, err := getAddress(c)
+	if err != nil {
+		return nil, err
+	}
+	if log.GetLevel() >= log.DebugLevel {
+		log.Debugf("Connecting to DB instance: %s", address)
+	}
 	influxClient, err := client.NewHTTPClient(client.HTTPConfig{
-		Addr: "http://" + c.GlobalString("influxdb"),
+		Addr:               "http://" + address,
 		InsecureSkipVerify: c.GlobalBool("insecure"),
 	})
 	if err != nil {

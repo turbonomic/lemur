@@ -1,10 +1,14 @@
 package utils
 
 import (
+	"fmt"
 	"net"
 	"os"
 	"os/user"
 	"strings"
+
+	"k8s.io/client-go/kubernetes"
+	"k8s.io/client-go/tools/clientcmd"
 )
 
 func GetLocalIP() string {
@@ -32,4 +36,19 @@ func GetUser(username string) (*user.User, error) {
 		return user.Current()
 	}
 	return user.Lookup(username)
+}
+
+func GetKubeClient(kubeconfig string) (*kubernetes.Clientset, error) {
+	if kubeconfig == "" {
+		return nil, fmt.Errorf("no kubeconfig is specified")
+	}
+	kubeConfig, err := clientcmd.BuildConfigFromFlags("", kubeconfig)
+	if err != nil {
+		return nil, err
+	}
+	kubeClient, err := kubernetes.NewForConfig(kubeConfig)
+	if err != nil {
+		return nil, err
+	}
+	return kubeClient, nil
 }
