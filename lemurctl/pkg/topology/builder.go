@@ -47,7 +47,7 @@ func (builder *Builder) processCommoditySold(tp *Topology) error {
 		"HOST_CLUSTER",
 	}
 	columns := append(influx.CommoditySoldFieldKeys, commoditySoldTagKeys...)
-	row, err := builder.db.Query(influx.NewDBQuery(builder.context).
+	row, err := builder.db.Query(influx.NewDBQuery().
 		WithColumns(columns...).
 		WithName("commodity_sold"))
 	if err != nil {
@@ -112,7 +112,7 @@ func (builder *Builder) processCommodityBought(tp *Topology) error {
 		"HOST_CLUSTER",
 	}
 	columns := append(influx.CommodityBoughtFieldKeys, commodityBoughtTagKeys...)
-	row, err := builder.db.Query(influx.NewDBQuery(builder.context).
+	row, err := builder.db.Query(influx.NewDBQuery().
 		WithColumns(columns...).
 		WithName("commodity_bought"))
 	if err != nil {

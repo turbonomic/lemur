@@ -2,10 +2,13 @@ package command
 
 import (
 	"fmt"
+	"strings"
+
+	"github.com/turbonomic/lemur/lemurctl/pkg/influx"
 	"github.com/turbonomic/lemur/lemurctl/pkg/topology"
 	"github.com/turbonomic/lemur/lemurctl/utils"
 	"github.com/turbonomic/turbo-go-sdk/pkg/proto"
-	"strings"
+	"github.com/urfave/cli"
 )
 
 var (
@@ -14,6 +17,25 @@ var (
 	headerFormat2  = "%-50s%-30s%-30s\n"
 	contentFormat2 = "%-50s%-30s%-30s\n"
 )
+
+func getClusterName(c *cli.Context, db *influx.DBInstance) (string, error) {
+	scope := c.String("cluster")
+	if scope != "" {
+		return scope, nil
+	}
+	clusters, _, err := getClusters(c, db)
+	if err != nil {
+		return "", err
+	}
+	if len(clusters) < 1 {
+		return "", fmt.Errorf("failed to get clusters")
+	}
+	if len(clusters) > 1 {
+		return "", fmt.Errorf("there are more than one clusters discovered, " +
+			"specify the name of the cluster to which the entities belong")
+	}
+	return clusters[0], nil
+}
 
 func displaySupplyChain(seeds []*topology.Entity, summary bool) {
 	nodes := topology.NewSupplyChainResolver().GetSupplyChainNodesFrom(seeds)

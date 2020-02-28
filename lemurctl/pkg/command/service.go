@@ -16,7 +16,7 @@ func GetService(c *cli.Context) error {
 	//		withColumns("APPLICATION_USED", "display_name").
 	//		withName("commodity_bought").
 	//		withConditions("entity_type='VIRTUAL_APPLICATION'", "AND time>now()-10m"))
-	row, err := db.Query(influx.NewDBQuery(c).
+	row, err := db.Query(influx.NewDBQuery().
 		WithQueryType("schema").
 		WithColumns("display_name").
 		WithName("commodity_bought").
