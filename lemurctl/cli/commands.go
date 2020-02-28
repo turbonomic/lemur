@@ -17,7 +17,7 @@ var (
 					ShortName: "app",
 					Usage:     "Display one or many application",
 					Action:    command.GetApplication,
-					Flags:     []cli.Flag{flClusterName, flSortVCPU, flSupplyChain},
+					Flags:     []cli.Flag{flClusterName, flClusterType, flSortVCPU, flSupplyChain},
 					ArgsUsage: "[NAME]",
 				},
 				{
@@ -33,7 +33,7 @@ var (
 					ShortName: "c",
 					Usage:     "Display one or many containers",
 					Action:    command.GetContainer,
-					Flags:     []cli.Flag{flClusterName, flSortVCPU, flSupplyChain},
+					Flags:     []cli.Flag{flClusterName, flClusterType, flSortVCPU, flSupplyChain},
 					ArgsUsage: "[NAME]",
 				},
 				{
@@ -41,7 +41,7 @@ var (
 					ShortName: "po",
 					Usage:     "Display one or many container pods",
 					Action:    command.GetContainerPod,
-					Flags:     []cli.Flag{flClusterName, flSortVCPU, flSupplyChain},
+					Flags:     []cli.Flag{flClusterName, flClusterType, flSortVCPU, flSupplyChain},
 					ArgsUsage: "[NAME]",
 				},
 				{
@@ -49,7 +49,7 @@ var (
 					ShortName: "h",
 					Usage:     "Display one or many physical hosts that belong to a cluster",
 					Action:    command.GetPhysicalMachine,
-					Flags:     []cli.Flag{flClusterName, flSortCPU, flSupplyChain},
+					Flags:     []cli.Flag{flClusterName, flClusterType, flSortCPU, flSupplyChain},
 					ArgsUsage: "[NAME]",
 				},
 				{
@@ -64,7 +64,7 @@ var (
 					ShortName: "vm",
 					Usage:     "Display one or many virtual machines that belong to a cluster",
 					Action:    command.GetVirtualMachine,
-					Flags:     []cli.Flag{flClusterName, flSortVCPU, flSupplyChain},
+					Flags:     []cli.Flag{flClusterName, flClusterType, flSortVCPU, flSupplyChain},
 					ArgsUsage: "[NAME]",
 				},
 			},

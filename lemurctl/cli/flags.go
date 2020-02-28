@@ -4,10 +4,9 @@ import "github.com/urfave/cli"
 
 var (
 	flClusterName = &cli.StringFlag{
-		Name:     "cluster,c",
-		Required: true,
-		Usage:    "Specify the `NAME` of the cluster to which the entities belong",
-		EnvVar:   "LEMUR_CLUSTER",
+		Name:   "cluster,c",
+		Usage:  "Specify the `NAME` of the cluster to which the entities belong",
+		EnvVar: "LEMUR_CLUSTER",
 	}
 	flSortVCPU = &cli.StringFlag{
 		Name:  "sort,s",

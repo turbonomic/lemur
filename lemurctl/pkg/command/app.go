@@ -13,6 +13,10 @@ func GetApplication(c *cli.Context) error {
 	if err != nil {
 		return err
 	}
+	scope, err := getClusterName(c, db)
+	if err != nil {
+		return err
+	}
 	defer db.Close()
 	tp, err := topology.NewTopologyBuilder(db, c).Build()
 	if err != nil {
@@ -27,7 +31,6 @@ func GetApplication(c *cli.Context) error {
 	}
 	topology.SetEntityListSortStrategy(sortType, sortMetric)
 	// Display
-	scope := c.String("cluster")
 	name := c.Args().Get(0)
 	if c.Bool("supplychain") {
 		return showApp(scope, name, tp)

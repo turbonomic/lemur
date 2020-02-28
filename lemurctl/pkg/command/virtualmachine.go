@@ -14,6 +14,10 @@ func GetVirtualMachine(c *cli.Context) error {
 		return err
 	}
 	defer db.Close()
+	scope, err := getClusterName(c, db)
+	if err != nil {
+		return err
+	}
 	tp, err := topology.NewTopologyBuilder(db, c).Build()
 	if err != nil {
 		return err
@@ -26,7 +30,6 @@ func GetVirtualMachine(c *cli.Context) error {
 	}
 	topology.SetEntityListSortStrategy(sortType, sortMetric)
 	// Display
-	scope := c.String("cluster")
 	name := c.Args().Get(0)
 	if c.Bool("supplychain") {
 		return showVirtualMachine(scope, name, tp)
