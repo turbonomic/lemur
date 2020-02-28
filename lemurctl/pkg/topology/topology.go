@@ -52,7 +52,7 @@ func (t *Topology) GetVirtualMachinesInCluster(clusterName string) []*Entity {
 	return t.getEntitiesInCluster(clusterName, int32(proto.EntityDTO_VIRTUAL_MACHINE))
 }
 
-func (t *Topology) GetPhysicalMachinesInCluster(clusterName string) [] *Entity {
+func (t *Topology) GetPhysicalMachinesInCluster(clusterName string) []*Entity {
 	return t.getEntitiesInCluster(clusterName, int32(proto.EntityDTO_PHYSICAL_MACHINE))
 }
 

@@ -43,7 +43,7 @@ var (
 				header:   "VMEM (MB)",
 				commName: "VMEM",
 				commType: boughtType,
-				factor:   1E-3,
+				factor:   1e-3,
 			},
 		},
 		proto.EntityDTO_CONTAINER: {
@@ -57,7 +57,7 @@ var (
 				header:   "VMEM (MB)",
 				commName: "VMEM",
 				commType: soldType,
-				factor:   1E-3,
+				factor:   1e-3,
 			},
 		},
 		proto.EntityDTO_CONTAINER_POD: {
@@ -71,7 +71,7 @@ var (
 				header:   "VMEM (MB)",
 				commName: "VMEM",
 				commType: soldType,
-				factor:   1E-3,
+				factor:   1e-3,
 			},
 		},
 		proto.EntityDTO_VIRTUAL_MACHINE: {
@@ -85,7 +85,7 @@ var (
 				header:   "VMEM (GB)",
 				commName: "VMEM",
 				commType: soldType,
-				factor:   1E-6,
+				factor:   1e-6,
 			},
 			{
 				header:   "VCPUREQUEST (MHz)",
@@ -97,7 +97,7 @@ var (
 				header:   "VMEMREQUEST (GB)",
 				commName: "VMEM_REQUEST",
 				commType: soldType,
-				factor:   1E-6,
+				factor:   1e-6,
 			},
 		},
 		proto.EntityDTO_PHYSICAL_MACHINE: {
@@ -111,7 +111,7 @@ var (
 				header:   "MEM (GB)",
 				commName: "MEM",
 				commType: soldType,
-				factor:   1E-6,
+				factor:   1e-6,
 			},
 		},
 		proto.EntityDTO_STORAGE: {
@@ -139,7 +139,7 @@ var (
 				header:   "MEM (GB)",
 				commName: "MEM",
 				commType: soldType,
-				factor:   1E-6,
+				factor:   1e-6,
 			},
 		},
 	}
