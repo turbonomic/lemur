@@ -1,13 +1,13 @@
 package cli
 
 import (
-	log "github.com/sirupsen/logrus"
-	"github.com/turbonomic/lemur/lemurctl/utils"
-	"github.com/turbonomic/lemur/lemurctl/version"
-	"github.com/urfave/cli"
 	"os"
 	"path"
 	"time"
+
+	log "github.com/sirupsen/logrus"
+	"github.com/turbonomic/lemur/lemurctl/version"
+	"github.com/urfave/cli"
 )
 
 var (
@@ -41,9 +41,14 @@ func Run() {
 	app.Flags = []cli.Flag{
 		cli.StringFlag{
 			Name:   "influxdb",
-			Value:  utils.GetLocalIP() + ":8086",
 			Usage:  "specify the endpoint of the InfluxDB server",
 			EnvVar: "INFLUXDB_SERVER",
+		},
+		cli.StringFlag{
+			Name:   "kubeconfig",
+			Usage:  "path to the kubeconfig file to access the Lemur cluster",
+			EnvVar: "KUBECONFIG",
+			Value:  "",
 		},
 		cli.BoolFlag{
 			Name:   "insecure,k",
