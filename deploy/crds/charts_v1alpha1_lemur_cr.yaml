@@ -42,6 +42,55 @@ spec:
   vcenter:
     enabled: false
 
+  # Istio ingress configuration
+  istioingress:
+    enabled: true
+    routes:
+      - match:
+          - uri:
+              prefix: /grafana
+        route:
+          - destination:
+              host: grafana.lemur.svc.cluster.local
+              port:
+                number: 3000
+      - match:
+          - uri:
+              prefix: /vmturbo/remoteMediation
+        rewrite:
+          uri: /remoteMediation
+        route:
+          - destination:
+              host: topology-processor.lemur.svc.cluster.local
+              port:
+                number: 8080
+      - match:
+          - uri:
+              prefix: /kiali
+        route:
+          - destination:
+              host: kiali.istio-system.svc.cluster.local
+              port:
+                number: 20001
+      - match:
+          - uri:
+              prefix: /jaeger
+        route:
+          - destination:
+              host: tracing.istio-system.svc.cluster.local
+              port:
+                number: 80
+      - match:
+          - uri:
+              prefix: /influxdb/query
+        rewrite:
+          uri: /query
+        route:
+          - destination:
+              host: influxdb.lemur.svc.cluster.local
+              port:
+                number: 8086
+
   # Lemur service configurations and resource limits
   api:
     image:
@@ -203,53 +252,6 @@ spec:
 
   nginxingress:
     enabled: false
-  istioingress:
-    enabled: true
-    routes:
-    - match:
-      - uri:
-          prefix: /grafana
-      route:
-      - destination:
-          host: grafana.lemur.svc.cluster.local
-          port:
-            number: 3000
-    - match:
-      - uri:
-          prefix: /vmturbo/remoteMediation
-      rewrite:
-        uri: /remoteMediation
-      route:
-      - destination:
-          host: topology-processor.lemur.svc.cluster.local
-          port:
-            number: 8080
-    - match:
-      - uri:
-          prefix: /kiali
-      route:
-      - destination:
-          host: kiali.istio-system.svc.cluster.local
-          port:
-            number: 20001
-    - match:
-      - uri:
-          prefix: /jaeger
-      route:
-      - destination:
-          host: tracing.istio-system.svc.cluster.local
-          port:
-            number: 80
-    - match:
-      - uri:
-          prefix: /influxdb/query
-      rewrite:
-        uri: /query
-      route:
-      - destination:
-          host: influxdb.lemur.svc.cluster.local
-          port:
-            number: 8086
   platform:
     enabled: true
   control:
