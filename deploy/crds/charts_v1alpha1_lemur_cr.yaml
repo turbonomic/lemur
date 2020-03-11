@@ -30,7 +30,7 @@ spec:
       opsManagerPassword: administrator
     image:
       repository: turbonomic/kubeturbo
-      tag: latest
+      tag: 7.21.1
     serverMeta:
       version: 7.21
       turboServer: https://t8c-istio-ingressgateway.lemur
