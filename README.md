@@ -21,7 +21,7 @@ limitations under the License.
 -->
 [![License](https://img.shields.io/:license-apache-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
 ![Docker Pulls](https://img.shields.io/docker/pulls/lemurnomic/t8c-operator.svg?maxAge=604800)
-[![Slack Status](https://joinlemur.herokuapp.com/badge.svg)](https://lemurstack.slack.com)
+[![Slack Status](https://joinlemur.herokuapp.com/badge.svg)](https://docs.google.com/forms/d/1N6BSlpDdsB5VT9FnEAC7SyTzAosPbhI_3ssdKVfAQ5U/viewform?edit_requested=true)
 [Join Lemur SLACK!](https://joinlemur.herokuapp.com)
 
 **Documentation** is being maintained on the Wiki for this project.  Visit [Lemur Wiki](https://github.com/turbonomic/lemur/wiki) for the full documentation, examples and guides. 
