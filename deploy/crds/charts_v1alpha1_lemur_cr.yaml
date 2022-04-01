@@ -30,9 +30,9 @@ spec:
       opsManagerPassword: administrator
     image:
       repository: turbonomic/kubeturbo
-      tag: 7.21.1
+      tag: 8.5.0
     serverMeta:
-      version: 7.21
+      version: 8.0
       turboServer: https://t8c-istio-ingressgateway.lemur
 
   aws:
@@ -183,7 +183,7 @@ spec:
   # =======================================================================
   global:
     repository: turbonomic
-    tag: 7.21.0
+    tag: 8.5.0
     pullPolicy: Always
     ingress:
       domain: "*"
