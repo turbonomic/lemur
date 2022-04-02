@@ -1,6 +1,7 @@
 package influx
 
 import (
+	"context"
 	"fmt"
 	"strings"
 
@@ -126,7 +127,7 @@ func getAddress(c *cli.Context) (string, error) {
 	}
 	svc, err := kubeClient.CoreV1().
 		Services(lemurDefaultNamespace).
-		Get(lemurServiceName, metav1.GetOptions{})
+		Get(context.TODO(), lemurServiceName, metav1.GetOptions{})
 	if err != nil {
 		return "", err
 	}
